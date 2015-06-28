@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3F406BBC-7C98-43F0-BAD5-95518E91457E</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BasicSample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AD4B458D0D225ED63FAE0155615993B7D3ECE020</key>
+		<string>https://github.com/cinder/Cinder.git</string>
+		<key>B4F8B5CE476B140F328F17889ECB06C8A990A0A4</key>
+		<string>github.com:cwhitney/Cinder-Syphon.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>BasicSample/xcode/BasicSample.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AD4B458D0D225ED63FAE0155615993B7D3ECE020</key>
+		<string>../../../../../..</string>
+		<key>B4F8B5CE476B140F328F17889ECB06C8A990A0A4</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:cwhitney/Cinder-Syphon.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B4F8B5CE476B140F328F17889ECB06C8A990A0A4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD4B458D0D225ED63FAE0155615993B7D3ECE020</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B4F8B5CE476B140F328F17889ECB06C8A990A0A4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Cinder-Syphon-090</string>
+		</dict>
+	</array>
+</dict>
+</plist>

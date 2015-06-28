@@ -83,9 +83,9 @@ void syphonServerDirectory::refresh(bool isAnnounce){
     }
     
     if(isAnnounce){
-        mAnnouncedSignal(eventArgs);
+        mAnnouncedSignal.emit( eventArgs );
     } else {
-        mRetiredSignal(eventArgs);
+        mRetiredSignal.emit( eventArgs );
     }
 }
 
@@ -93,7 +93,8 @@ bool syphonServerDirectory::serverExists(std::string _serverName, std::string _a
     return serverExists(syphonServerDescription(_serverName, _appName));
 }
 
-bool syphonServerDirectory::serverExists(syphonServerDescription _server){
+bool syphonServerDirectory::serverExists(syphonServerDescription _server)
+{
     for(auto& s : serverList){
         if(s == _server){
             return true;
@@ -103,17 +104,20 @@ bool syphonServerDirectory::serverExists(syphonServerDescription _server){
     return false;
 }
 
-syphonServerDescription& syphonServerDirectory::getDescription(int _idx){
+syphonServerDescription& syphonServerDirectory::getDescription(int _idx)
+{
     return serverList.at(_idx);
 }
 
-std::vector<syphonServerDescription>& syphonServerDirectory::getServerList(){
+std::vector<syphonServerDescription>& syphonServerDirectory::getServerList()
+{
     return serverList;
 }
 
-void syphonServerDirectory::printList(){
+void syphonServerDirectory::printList()
+{
     for(auto& s : serverList){
-        ci::app::console()<<"serverName: "<<s.serverName<<" appName: "<<s.appName<<"\n";
+        ci::app::console() << "serverName: " << s.serverName << " appName: " << s.appName << "\n";
     }
 }
 

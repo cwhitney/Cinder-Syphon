@@ -29,10 +29,12 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
 #include "cinder/ImageIo.h"
 #include "cinder/gl/Texture.h"
 #include "cinder/gl/GlslProg.h"
+#include "cinder/gl/gl.h"
+#include "cinder/app/RendererGl.h"
 #include "cinder/Rand.h"
 #include "cinder/Color.h"
 #include "cinder/gl/gl.h"
@@ -45,7 +47,7 @@ using namespace std;
 #define WIDTH 512
 #define HEIGHT 512
 
-class SyphonBasicApp : public AppNative {
+class SyphonBasicApp : public App {
 public:
 	void prepareSettings( Settings *settings );
 	void keyDown( KeyEvent event );
@@ -118,13 +120,17 @@ void SyphonBasicApp::draw()
 	gl::clear(Color::white());
     gl::color(ColorA(1.f, 1.f, 1.f, 1.f));
 	
-    mShader->bind();
-    mShader->uniform( "tex0", 0 );
-    mShader->uniform( "sampleOffset", Vec2f( cos( mAngle ), sin( mAngle ) ) * ( 3.0f / getWindowWidth() ) );
-    gl::draw(mLogo, Vec2f::zero());
-    mShader->unbind();
+    {
+        gl::ScopedGlslProg scp( mShader );
+        
+        mShader->bind();
+        mShader->uniform( "tex0", 0 );
+        mShader->uniform( "sampleOffset", vec2( cos( mAngle ), sin( mAngle ) ) * ( 3.0f / getWindowWidth() ) );
+        gl::draw(mLogo, vec2(0.0));
+//        mShader->unbind();
+    }
     
-    mClientSyphon.draw(Vec2f(16.f, 64.f)); //draw our client image
+    mClientSyphon.draw(vec2(16.f, 64.f)); //draw our client image
     
 	mScreenSyphon.publishScreen(); //publish the screen's output
 	mTextureSyphon.publishTexture(mLogo); //publish our texture without shader
@@ -159,4 +165,4 @@ void SyphonBasicApp::mouseDrag( MouseEvent event )
 	//
 }
 
-CINDER_APP_NATIVE( SyphonBasicApp, RendererGl )
+CINDER_APP( SyphonBasicApp, RendererGl )

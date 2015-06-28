@@ -29,20 +29,24 @@
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "cinder/app/AppBasic.h"
-#include "cinder/gl/Texture.h"
+#include "cinder/app/App.h"
+#include "cinder/gl/gl.h"
 
 class syphonServer {
 	public:
 	syphonServer();
 	~syphonServer();
-	void setName (std::string n);
+	void setName( std::string n );
 	std::string getName();
 	void publishScreen();
-    void publishTexture(ci::gl::TextureRef inputTexture);
+    void publishTexture( ci::gl::TextureRef inputTexture );
+    
+    void bind( ci::vec2);
+    void unbindAndPublish();
 	
     
 protected:
 	void *mSyphon;
+    bool bShouldUnbind;
 
 };

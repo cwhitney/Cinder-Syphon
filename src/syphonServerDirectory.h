@@ -9,7 +9,7 @@
 #pragma once
 
 #include "cinder/Cinder.h"
-#include <boost/signals2.hpp>
+#include "cinder/app/App.h"
 #include <algorithm>
 
 class syphonServerDirectory;
@@ -31,9 +31,9 @@ public:
     std::string serverName, appName;
 };
 
-typedef boost::signals2::signal<void( std::vector<syphonServerDescription> )> SyphonServerAnnouncedSignal;
-typedef boost::signals2::signal<void( std::vector<syphonServerDescription> )> SyphonServerUpdatedSignal;
-typedef boost::signals2::signal<void( std::vector<syphonServerDescription> )> SyphonServerRetiredSignal;
+typedef ci::signals::Signal<void( std::vector<syphonServerDescription> )> SyphonServerAnnouncedSignal;
+typedef ci::signals::Signal<void( std::vector<syphonServerDescription> )> SyphonServerUpdatedSignal;
+typedef ci::signals::Signal<void( std::vector<syphonServerDescription> )> SyphonServerRetiredSignal;
 
 class syphonServerDirectory {
 public:
@@ -44,10 +44,10 @@ public:
     bool isSetup();
     int size();
     
-    bool isValidIndex(int _idx);
-    bool serverExists(std::string _serverName, std::string _appName);
-    bool serverExists(syphonServerDescription _server);
-    syphonServerDescription& getDescription(int _idx);
+    bool isValidIndex( int _idx );
+    bool serverExists( std::string _serverName, std::string _appName );
+    bool serverExists( syphonServerDescription _server );
+    syphonServerDescription& getDescription(int _idx );
     
     std::vector<syphonServerDescription>& getServerList();
     void printList();

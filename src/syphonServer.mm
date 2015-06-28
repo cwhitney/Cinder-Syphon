@@ -32,6 +32,7 @@
 #include "syphonServer.h"
 
 #import <Syphon/Syphon.h>
+#include "cinder/Log.h"
 
 syphonServer::syphonServer()
 {
@@ -49,7 +50,7 @@ syphonServer::~syphonServer()
 }
 
 
-void syphonServer::setName(std::string n)
+void syphonServer::setName( std::string n )
 {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
@@ -92,6 +93,20 @@ void syphonServer::publishScreen()
 	this->publishTexture(mTex);
 }
 
+void syphonServer::bind( ci::vec2 size )
+{
+    bShouldUnbind = [(SyphonServer *)mSyphon bindToDrawFrameOfSize:NSMakeSize(size.x, size.y)];
+}
+
+void syphonServer::unbindAndPublish()
+{
+    if( bShouldUnbind ){
+        [(SyphonServer *)mSyphon unbindAndPublish];
+        bShouldUnbind = false;
+    }else{
+        CI_LOG_E("Syphon :: Bind wasn't successful, so no unbind.");
+    }
+}
 
 void syphonServer::publishTexture(ci::gl::TextureRef inputTexture)
 {
@@ -102,10 +117,11 @@ void syphonServer::publishTexture(ci::gl::TextureRef inputTexture)
 		{
 			mSyphon = [[SyphonServer alloc] initWithName:@"Untitled" context:CGLGetCurrentContext() options:nil];
 		}
-		[(SyphonServer *)mSyphon publishFrameTexture:texID textureTarget:GL_TEXTURE_2D imageRegion:NSMakeRect(0, 0, inputTexture->getWidth(), inputTexture->getHeight()) textureDimensions:NSMakeSize(inputTexture->getWidth(), inputTexture->getHeight()) flipped:true];
+        
+		[(SyphonServer *)mSyphon publishFrameTexture:texID textureTarget:inputTexture->getTarget() imageRegion:NSMakeRect(0, 0, inputTexture->getWidth(), inputTexture->getHeight()) textureDimensions:NSMakeSize(inputTexture->getWidth(), inputTexture->getHeight()) flipped:true];
 		[pool drain];
 	} else {
-		ci::app::console()<<"syphonServer is not setup, or texture is not properly backed.  Cannot draw.\n";
+		CI_LOG_E("SyphonServer is not setup, or texture is not properly backed.  Cannot draw.");
 	}
 }
 

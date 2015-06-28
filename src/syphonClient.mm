@@ -133,7 +133,7 @@ void syphonClient::bind()
 
 		mTex = ci::gl::Texture::create(GL_TEXTURE_RECTANGLE_ARB, m_id,
 								   texSize.width, texSize.height, true);
-		mTex->setFlipped();
+//		mTex->setFlipped();
 		
 		mTex->bind();
     }
@@ -161,11 +161,11 @@ void syphonClient::unbind()
 	[pool drain];
 }
 
-void syphonClient::draw(ci::Vec2f origin, ci::Vec2f drawSize){
+void syphonClient::draw(ci::vec2 origin, ci::vec2 drawSize){
 	draw(origin.x, origin.y, drawSize.x, drawSize.y);
 }
 
-void syphonClient::draw(ci::Vec2f origin){
+void syphonClient::draw(ci::vec2 origin){
 	draw(origin.x, origin.y);
 }
 
@@ -173,7 +173,7 @@ void syphonClient::draw(float x, float y, float w, float h)
 {
 	if(bSetup && mTex){
 		this->bind();
-		ci::gl::draw(*mTex, ci::Rectf(x, y, x + w, y + h));
+		ci::gl::draw(mTex, ci::Rectf(x, y, x + w, y + h));
 		this->unbind();
 	}
 }
@@ -182,7 +182,7 @@ void syphonClient::draw(float x, float y)
 {
 	if(bSetup && mTex){
 		this->bind();
-		ci::gl::draw(*mTex,ci::Vec2f(x, y));
+		ci::gl::draw(mTex, ci::vec2(x, y));
 		this->unbind();
 	}
 }
